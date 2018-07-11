@@ -1,0 +1,24 @@
+{
+  "name": "vote2play",
+  "version": "1.0.0",
+  "description": "Blockchain Voting Platform",
+  "main": "index.js",
+  "dependencies": {
+    "solc": "^0.4.24",
+    "web3": "^1.0.0-beta.34"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/teohrt/Vote2Play.git"
+  },
+  "author": "Trace Ohrt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/teohrt/Vote2Play/issues"
+  },
+  "homepage": "https://github.com/teohrt/Vote2Play#readme"
+}
