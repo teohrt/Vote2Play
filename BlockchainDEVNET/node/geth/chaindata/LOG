@@ -74,3 +74,39 @@
 22:26:38.727327 table@remove removed @14
 23:00:10.054397 db@close closing
 23:00:10.054585 db@close done T·182.667µs
+=============== Jul 11, 2018 (CDT) ===============
+23:15:58.433465 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+23:15:58.434889 version@stat F·[0 1] S·114KiB[0B 114KiB] Sc·[0.00 0.00]
+23:15:58.434950 db@open opening
+23:15:58.435093 journal@recovery F·1
+23:15:58.438842 journal@recovery recovering @16
+23:15:58.547465 memdb@flush created L0@19 N·18076 S·922KiB "Dat..ion,v2346":"r\x00\x00..\xc8p\x82,v20417"
+23:15:58.551492 version@stat F·[1 1] S·1MiB[922KiB 114KiB] Sc·[0.25 0.00]
+23:15:58.588569 db@janitor F·4 G·0
+23:15:58.588675 db@open done T·153.652645ms
+23:17:27.001317 table@compaction L0·1 -> L1·1 S·1MiB Q·21187
+23:17:27.070475 table@build created L1@22 N·13814 S·792KiB "\x02d\xfc..\x19Ba,v485":"\xfe\x88\xcf..H\xef\xcc,v557"
+23:17:27.070565 version@stat F·[0 1] S·792KiB[0B 792KiB] Sc·[0.00 0.01]
+23:17:27.082251 table@compaction committed F-1 S-244KiB Ke·0 D·6026 T·80.841748ms
+23:17:27.082811 table@remove removed @19
+23:17:27.083022 table@remove removed @18
+23:48:50.525982 db@close closing
+23:48:50.526133 db@close done T·145.36µs
+=============== Jul 12, 2018 (CDT) ===============
+00:28:26.650642 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+00:28:26.651207 version@stat F·[0 1] S·792KiB[0B 792KiB] Sc·[0.00 0.01]
+00:28:26.651228 db@open opening
+00:28:26.651305 journal@recovery F·1
+00:28:26.655074 journal@recovery recovering @20
+00:28:26.750965 memdb@flush created L0@23 N·17716 S·903KiB "Dat..ion,v20423":"r\x00\x00..\xce6\v,v38134"
+00:28:26.758224 version@stat F·[1 1] S·1MiB[903KiB 792KiB] Sc·[0.25 0.01]
+00:28:26.781677 db@janitor F·4 G·0
+00:28:26.781747 db@open done T·130.500524ms
+00:29:54.002125 table@compaction L0·1 -> L1·1 S·1MiB Q·38906
+00:29:54.078942 table@build created L1@26 N·25624 S·1MiB "\x02d\xfc..\x19Ba,v485":"\xfe\x88\xcf..H\xef\xcc,v557"
+00:29:54.079130 version@stat F·[0 1] S·1MiB[0B 1MiB] Sc·[0.00 0.01]
+00:29:54.091122 table@compaction committed F-1 S-239KiB Ke·0 D·5906 T·88.860178ms
+00:29:54.091493 table@remove removed @23
+00:29:54.091753 table@remove removed @22
+00:33:48.892802 db@close closing
+00:33:48.893218 db@close done T·410.35µs
