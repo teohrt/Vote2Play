@@ -1,2 +1,2 @@
-node_modules
-BlockchainDEVNET/node/geth/*
+node_modules/
+geth/
