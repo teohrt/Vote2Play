@@ -12,12 +12,12 @@ module.exports = function(web3) {
 
             try {
 
-                var code = fs.readFileSync('vote2Play.sol').toString();
-                var compiledCode = solc.compile(code);
-                var abiDefinition = JSON.parse(compiledCode.contracts[':vote2Play'].interface);
-                var contract = web3.eth.contract(abidefinition);
-                var byteCode = compiledCode.contracts['vote2Play'].byteCode;
-                var deployedContract = contract.new({data: byteCode, from: web3.eth.accounts[0], gas: 9000000});
+                var code = fs.readFileSync('./BlockchainDEVNET/scripts/vote2Play.sol').toString();
+                var compiledCode = solc.compile( code );
+                var abiDefinition = JSON.parse( compiledCode.contracts[':vote2Play'].interface );
+                var contract = web3.eth.contract( abiDefinition );
+                var byteCode = compiledCode.contracts[':vote2Play'].bytecode;
+                var deployedContract = contract.new( { data: byteCode, from: web3.eth.accounts[0], gas: 9000000 } );
                 var contractInstance = contract.at(deployedContract.address);
 
                 while(true) {
@@ -44,4 +44,8 @@ module.exports = function(web3) {
         });
     }
     return obj;
+};
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
