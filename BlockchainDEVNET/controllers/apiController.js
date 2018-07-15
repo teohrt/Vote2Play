@@ -1,12 +1,11 @@
 var bodyParser = require('body-parser');
 
-module.exports = function(app) {
+module.exports = function(app, web3) {
 
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true}));
 
     app.get('/', function(req, res) {
-        console.log()
-        res.send('Simple API implementation')
+        res.send('Simple API implementation');
     });
 };
