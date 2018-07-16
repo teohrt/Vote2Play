@@ -23,8 +23,9 @@ module.exports = function(web3, contractAddressList) {
                         if (deployedContract.address) {
 
                             result.address = deployedContract.address;
+                            result.abi = abiDefinition;
                             console.log('***Successful compile. Contract Address: ' + deployedContract.address);
-                            contractAddressList.push(result.address);
+                            contractAddressList.push(result);
                             return resolve( { minedAddress: deployedContract.address } ); 
                             
                         }
@@ -34,7 +35,7 @@ module.exports = function(web3, contractAddressList) {
                 }
                 catch (e) {
 
-                    console.log('Contract creation error. : ');
+                    console.log('***Error with contract creation. : ');
                     console.log(e);
                     return reject(e);
 
