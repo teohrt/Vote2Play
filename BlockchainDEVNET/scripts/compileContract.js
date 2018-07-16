@@ -1,10 +1,10 @@
 var fs = require('fs');
 var solc = require('solc');
 
-module.exports = function(web3) {
+module.exports = function(web3, contractAddressList) {
     var obj = {
         
-        createContract:  function() {
+        create:  function() {
 
             return new Promise(async (resolve, reject) => {
                 var result = {};
@@ -17,15 +17,16 @@ module.exports = function(web3) {
                     var contract = web3.eth.contract( abiDefinition );
                     var byteCode = '0x' + compiledCode.contracts[':vote2Play'].bytecode;
                     var deployedContract = contract.new( { data: byteCode, from: web3.eth.accounts[0], gas: 1000000 } );
-                    //var contractInstance = contract.at(deployedContract.address);
 
                     while(true) {
 
                         if (deployedContract.address) {
 
-                            console.log('successful compile');
+                            result.address = deployedContract.address;
+                            console.log('***Successful compile. Contract Address: ' + deployedContract.address);
+                            contractAddressList.push(result.address);
                             return resolve( { minedAddress: deployedContract.address } ); 
-
+                            
                         }
                         await sleep(1000);
                     }
