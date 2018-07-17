@@ -5,6 +5,7 @@ module.exports = function(app, web3, contractAddressList) {
     var chainInfo = require('../scripts/chainInfo')(web3);
     var check = require('../scripts/check')(web3, contractAddressList);
     var add = require('../scripts/add')(web3, contractAddressList);
+    var addX = require('../scripts/addX')(web3, contractAddressList);
 
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true}));
@@ -47,6 +48,18 @@ module.exports = function(app, web3, contractAddressList) {
         });
     });
 
+    // Adds a varialbe value to the contract's counter
+    app.get('/addX/:number', (req, res) => {
+        var number = req.params.number;
+        addX.addX(number)
+        .then(result => {
+            res.send({ data: result });
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    });
+    
     // Returns the amount the contract has been added to
     app.get('/check', (req, res) => {
         check.check()
