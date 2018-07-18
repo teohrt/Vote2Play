@@ -4,19 +4,19 @@ var solc = require('solc');
 module.exports = function(web3, contractAddressList) {
     var obj = {
         
-        create:  function() {
+        create:  function(itemID, responses) {
 
             return new Promise(async (resolve, reject) => {
                 var result = {};
 
                 try {
 
-                    var code = fs.readFileSync('./BlockchainDEVNET/scripts/vote2Play.sol').toString();
+                    var code = fs.readFileSync('./BlockchainDEVNET/scripts/Voting.sol').toString();
                     var compiledCode = solc.compile( code );
-                    var abiDefinition = JSON.parse( compiledCode.contracts[':vote2Play'].interface );
+                    var abiDefinition = JSON.parse( compiledCode.contracts[':Voting'].interface );
                     var contract = web3.eth.contract( abiDefinition );
-                    var byteCode = '0x' + compiledCode.contracts[':vote2Play'].bytecode;
-                    var deployedContract = contract.new( { data: byteCode, from: web3.eth.accounts[0], gas: 1000000 } );
+                    var byteCode = '0x' + compiledCode.contracts[':Voting'].bytecode;
+                    var deployedContract = contract.new( itemID, responses, { data: byteCode, from: web3.eth.accounts[0], gas: 900000 } );
 
                     while(true) {
 

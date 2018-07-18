@@ -10,8 +10,8 @@ module.exports = function(web3, contractAddressList) {
                     var contractInstance = CounterContract.at(contractAddressList[0].address);
 
                     // Make the check
-                    var result = contractInstance.checkN.call({ from: web3.eth.accounts[0], gas: 1000000});
-                    contractInstance.checkN({ from: web3.eth.accounts[0], gas: 1000000});
+                    var result = contractInstance.getTotalVotes.call({ from: web3.eth.accounts[0], gas: 1000000});
+                    contractInstance.getTotalVotes({ from: web3.eth.accounts[0], gas: 1000000});
                     
                     return resolve({ value: result});
                 }

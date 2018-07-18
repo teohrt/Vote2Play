@@ -2,7 +2,7 @@ module.exports = function(web3, contractAddressList) {
 
     var obj = {
 
-        add: function() {
+        vote: function(vote) {
             return new Promise(async (resolve, reject) => {
                 try {
                     var abiDef = contractAddressList[0].abi;
@@ -10,13 +10,13 @@ module.exports = function(web3, contractAddressList) {
                     var contractInstance = CounterContract.at(contractAddressList[0].address);
 
                     // Add to the contract's counter
-                    var result = contractInstance.add.call({ from: web3.eth.accounts[0], gas: 1000000});
-                    contractInstance.add({ from: web3.eth.accounts[0], gas: 1000000});
+                    var result = contractInstance.vote.call(number, { from: web3.eth.accounts[0], gas: 1000000});
+                    contractInstance.vote( web3.fromAscii(vote), { from: web3.eth.accounts[0], gas: 1000000});
 
-                    return resolve( { value: 'added 1' } ); 
+                    return resolve( { value: 'added x' } ); 
                 }
                 catch(e) {
-                    console.log('***Error with add\n');
+                    console.log('***Error with addX\n');
                     console.log(e);
                     return reject(e);
                 }

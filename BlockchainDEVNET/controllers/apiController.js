@@ -3,9 +3,8 @@ module.exports = function(app, web3, contractAddressList) {
     var bodyParser = require('body-parser');
     var compileContract = require('../scripts/compileContract')(web3, contractAddressList);
     var chainInfo = require('../scripts/chainInfo')(web3);
-    var check = require('../scripts/check')(web3, contractAddressList);
-    var add = require('../scripts/add')(web3, contractAddressList);
-    var addX = require('../scripts/addX')(web3, contractAddressList);
+    var getTotalVotes = require('../scripts/getTotalVotes')(web3, contractAddressList);
+    var vote = require('../scripts/vote')(web3, contractAddressList);
 
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true}));
@@ -23,7 +22,12 @@ module.exports = function(app, web3, contractAddressList) {
     
     // Compiles smart contract, deploys it and then returns the mined address
     app.get('/compile', (req, res) => {
-        compileContract.create()
+        var itemID = web3.fromAscii("Trace is cool");
+        var response1 = web3.fromAscii("lol");
+        var response2 = web3.fromAscii("bad joke");
+        var responses = [response1, response2];
+
+        compileContract.create(itemID, responses)
         .then(result => {
             res.send({ data: result });
         })
@@ -37,21 +41,10 @@ module.exports = function(app, web3, contractAddressList) {
         res.send(contractAddressList);
     });
 
-    // Adds 1 to the contract's counter
-    app.get('/add', (req, res) => {
-        add.add()
-        .then(result => {
-            res.send({ data: result });
-        })
-        .catch(error => {
-            console.log(error);
-        });
-    });
-
     // Adds a varialbe value to the contract's counter
-    app.get('/addX/:number', (req, res) => {
+    app.get('/vote/:number', (req, res) => {
         var number = req.params.number;
-        addX.addX(number)
+        vote.vote(number)
         .then(result => {
             res.send({ data: result });
         })
@@ -61,8 +54,8 @@ module.exports = function(app, web3, contractAddressList) {
     });
     
     // Returns the amount the contract has been added to
-    app.get('/check', (req, res) => {
-        check.check()
+    app.get('/getTotalVotes', (req, res) => {
+        getTotalVotes.check()
         .then(result => {
             res.send({ data: result });
         })
