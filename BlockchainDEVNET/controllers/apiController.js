@@ -1,10 +1,12 @@
-module.exports = function(app, web3, contractAddressList) {
+module.exports = function(app, web3, contractAddressList, gasAmount) {    
 
     var bodyParser = require('body-parser');
-    var compileContract = require('../scripts/compileContract')(web3, contractAddressList);
+    
     var chainInfo = require('../scripts/chainInfo')(web3);
-    var getTotalVotes = require('../scripts/getTotalVotes')(web3, contractAddressList);
-    var vote = require('../scripts/vote')(web3, contractAddressList);
+    var compileContract = require('../scripts/compileContract')(web3, contractAddressList, gasAmount);
+    var getTotalVotes = require('../scripts/getTotalVotes')(web3, contractAddressList, gasAmount);
+    var vote = require('../scripts/vote')(web3, contractAddressList, gasAmount);
+    var getVotesFor = require('../scripts/getVotesFor')(web3, contractAddressList, gasAmount);
 
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true}));
@@ -20,11 +22,20 @@ module.exports = function(app, web3, contractAddressList) {
         res.send(chainInfo.getStatus());
     });
     
+    // Returns list of smart contract blockchain addresses and their ABI's
+    app.get('/list', (req, res) => {
+        res.send(contractAddressList);
+    });
+
+    // TODO:
+    // Impliment POST and remove hardcoded variables
+    // Impliment dynamic contracts
+    //
     // Compiles smart contract, deploys it and then returns the mined address
     app.get('/compile', (req, res) => {
-        var itemID = web3.fromAscii("Trace is cool");
-        var response1 = web3.fromAscii("lol");
-        var response2 = web3.fromAscii("bad joke");
+        var itemID = "Trace is cool";
+        var response1 = "lol";
+        var response2 = "bad joke";
         var responses = [response1, response2];
 
         compileContract.create(itemID, responses)
@@ -35,16 +46,16 @@ module.exports = function(app, web3, contractAddressList) {
             console.log(error);
         });
     });
+    
+    // TODO:
+    // Impliment POST
+    // Impliment dynamic contracts
+    //
+    // Votes on a contract according to the sent response
+    app.get('/vote/', (req, res) => {
+        var response = "lol";
 
-    // Returns list of smart contract blockchain addresses and their ABI's
-    app.get('/list', (req, res) => {
-        res.send(contractAddressList);
-    });
-
-    // Adds a varialbe value to the contract's counter
-    app.get('/vote/:number', (req, res) => {
-        var number = req.params.number;
-        vote.vote(number)
+        vote.vote(response)
         .then(result => {
             res.send({ data: result });
         })
@@ -53,7 +64,11 @@ module.exports = function(app, web3, contractAddressList) {
         });
     });
     
-    // Returns the amount the contract has been added to
+    // TODO:
+    // Impliment POST
+    // Impliment dynamic contracts
+    //
+    // Returns amount of total votes on a contract
     app.get('/getTotalVotes', (req, res) => {
         getTotalVotes.check()
         .then(result => {
@@ -63,4 +78,27 @@ module.exports = function(app, web3, contractAddressList) {
             console.log(error);
         });
     });
+
+    // TODO:
+    // Impliment POST
+    // Impliment dynamic contracts
+    //
+    // Returns amount of votes for a response
+    app.get('/getVotesFor', (req, res) => {
+        var response = "badjoke";
+
+        getVotesFor.check(response)
+        .then(result => {
+            res.send({ data: result });
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    });
+
+    // TODO:
+    // ChangeVote
+    // GetResponseCounts
+    // getVoterHistory
+    // getVoterList
 };

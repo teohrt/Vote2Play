@@ -1,4 +1,5 @@
 // one node setup for clique PoA!! doesn't require bootnode!
 // This isn't secure because it's just local for now. and i live dangerously 
 
-geth --datadir node/ --rpc --rpcaddr 'localhost' --rpcapi 'personal,db,eth,net,web3,txpool,miner' --gasprice '1' -unlock 'd003738280a66cc20c9c633de81af41b08f09860' --password node/password.txt --mine
+geth --datadir node/ --rpc --rpcaddr 'localhost' --rpcapi 'personal,db,eth,net,web3,txpool,miner' --gasprice '1' -unlock 'cb35abfb5fd9ac77522287169e2fb6683da47a02
+' --password password.txt --mine

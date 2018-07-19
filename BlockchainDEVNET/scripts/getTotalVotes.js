@@ -1,4 +1,4 @@
-module.exports = function(web3, contractAddressList) {
+module.exports = function(web3, contractAddressList, gasAmount) {
 
     var obj = {
 
@@ -10,13 +10,13 @@ module.exports = function(web3, contractAddressList) {
                     var contractInstance = CounterContract.at(contractAddressList[0].address);
 
                     // Make the check
-                    var result = contractInstance.getTotalVotes.call({ from: web3.eth.accounts[0], gas: 1000000});
-                    contractInstance.getTotalVotes({ from: web3.eth.accounts[0], gas: 1000000});
+                    var result = contractInstance.getTotalVotes.call({ from: web3.eth.accounts[0], gas: gasAmount});
+                    contractInstance.getTotalVotes({ from: web3.eth.accounts[0], gas: gasAmount});
                     
                     return resolve({ value: result});
                 }
                 catch(e) {
-                    console.log('***Error with check\n');
+                    console.log('***Error with getting total votes\n');
                     console.log(e);
                     return reject(e);
                 }

@@ -1,7 +1,7 @@
 var fs = require('fs');
 var solc = require('solc');
 
-module.exports = function(web3, contractAddressList) {
+module.exports = function(web3, contractAddressList, gasAmount) {
     var obj = {
         
         create:  function(itemID, responses) {
@@ -16,7 +16,7 @@ module.exports = function(web3, contractAddressList) {
                     var abiDefinition = JSON.parse( compiledCode.contracts[':Voting'].interface );
                     var contract = web3.eth.contract( abiDefinition );
                     var byteCode = '0x' + compiledCode.contracts[':Voting'].bytecode;
-                    var deployedContract = contract.new( itemID, responses, { data: byteCode, from: web3.eth.accounts[0], gas: 900000 } );
+                    var deployedContract = contract.new( itemID, responses, { data: byteCode, from: web3.eth.accounts[0], gas: gasAmount } );
 
                     while(true) {
 
