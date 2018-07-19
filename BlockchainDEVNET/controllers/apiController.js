@@ -7,6 +7,10 @@ module.exports = function(app, web3, contractAddressList, gasAmount) {
     var getTotalVotes = require('../scripts/getTotalVotes')(web3, contractAddressList, gasAmount);
     var vote = require('../scripts/vote')(web3, contractAddressList, gasAmount);
     var getVotesFor = require('../scripts/getVotesFor')(web3, contractAddressList, gasAmount);
+    var changeVote = require('../scripts/changeVote')(web3, contractAddressList, gasAmount);
+    var getVoterList = require('../scripts/getVoterList')(web3, contractAddressList, gasAmount);
+    var getResponseCounts = require('../scripts/getResponseCounts')(web3, contractAddressList, gasAmount);
+    var getVoterHistory = require('../scripts/getVoterHistory')(web3, contractAddressList, gasAmount);
 
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true}));
@@ -85,7 +89,7 @@ module.exports = function(app, web3, contractAddressList, gasAmount) {
     //
     // Returns amount of votes for a response
     app.get('/getVotesFor', (req, res) => {
-        var response = "badjoke";
+        var response = "lol";
 
         getVotesFor.check(response)
         .then(result => {
@@ -97,8 +101,57 @@ module.exports = function(app, web3, contractAddressList, gasAmount) {
     });
 
     // TODO:
-    // ChangeVote
-    // GetResponseCounts
-    // getVoterHistory
-    // getVoterList
+    // Impliment POST
+    // 
+    // Changes previous vote value
+    app.get('/changeVote', (req, res) => {
+        var response = "bad joke";
+
+        changeVote.change(response)
+        .then(result => {
+            res.send({ data: result });
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    });
+
+    // TODO:
+    // Impliment POST
+    // 
+    // Returns voter addresses for an item
+    app.get('/getVoterList', (req, res) => {
+        getVoterList.check()
+        .then(result => {
+            res.send({ data: result });
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    });
+
+    // TODO:
+    // Impliment POST
+    // 
+    // Returns counts for the different responses of an item
+    app.get('/getResponseCounts', (req, res) => {
+        getResponseCounts.check()
+        .then(result => {
+            res.send({ data: result });
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    });
+
+    // Returns voter addresses and their associated response values
+    app.get('/getVoterHistory', (req, res) => {
+        getVoterHistory.check()
+        .then(result => {
+            res.send({ data: result });
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    });
 };
