@@ -13,5 +13,5 @@ var apiController = require('./BlockchainDEVNET/controllers/apiController');
 apiController(app, web3, contractAddressList, gasAmount);
 
 app.listen(serverPort, () => {
-    console.log('Blockchain is connected: ' + web3.isConnected() + '\nRESTful server listening on port: ' + serverPort + ' ...\n');
+    console.log('RESTful server listening on port: ' + serverPort + ' ...\nBlockchain is connected: ' + web3.isConnected() + '\n');
 });

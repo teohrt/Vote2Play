@@ -2,7 +2,7 @@ module.exports = function(web3, contractAddressList, gasAmount) {
 
     var obj = {
 
-        check: function() {
+        check: function( response ) {
             return new Promise(async (resolve, reject) => {
                 try {
                     var abiDef = contractAddressList[0].abi;
@@ -10,8 +10,8 @@ module.exports = function(web3, contractAddressList, gasAmount) {
                     var contractInstance = CounterContract.at(contractAddressList[0].address);
 
                     // Make the check
-                    var result = contractInstance.getResponseCounts.call({ from: web3.eth.accounts[0], gas: gasAmount});
-                    contractInstance.getResponseCounts({ from: web3.eth.accounts[0], gas: gasAmount});
+                    var result = contractInstance.getResponseCounts.call( response, { from: web3.eth.accounts[0], gas: gasAmount});
+                    contractInstance.getResponseCounts( response, { from: web3.eth.accounts[0], gas: gasAmount});
                     
                     return resolve({ value: result});
                 }

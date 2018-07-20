@@ -30,12 +30,9 @@ module.exports = function(app, web3, contractAddressList, gasAmount) {
     app.get('/list', (req, res) => {
         res.send(contractAddressList);
     });
-
-    // TODO:
-    // Impliment POST and remove hardcoded variables
-    // Impliment dynamic contracts
-    //
+    
     // Compiles smart contract, deploys it and then returns the mined address
+    // GET: Hard coded values for testing
     app.get('/compile', (req, res) => {
         var itemID = "Trace is cool";
         var response1 = "lol";
@@ -50,16 +47,18 @@ module.exports = function(app, web3, contractAddressList, gasAmount) {
             console.log(error);
         });
     });
-    
-    // TODO:
-    // Impliment POST
-    // Impliment dynamic contracts
-    //
-    // Votes on a contract according to the sent response
-    app.get('/vote/', (req, res) => {
-        var response = "lol";
 
-        vote.vote(response)
+    // postman example:
+    // {
+    //     "itemID": "test contract",
+    //     "responses": ["test1", "test2"]
+    // }
+    //
+    // TODO: Implement dynamic contracts
+    //
+    // Compiles smart contract, deploys it and then returns the mined address
+    app.post('/compile', (req, res) => {
+        compileContract.create(req.body.itemID, req.body.responses)
         .then(result => {
             res.send({ data: result });
         })
@@ -68,9 +67,20 @@ module.exports = function(app, web3, contractAddressList, gasAmount) {
         });
     });
     
-    // TODO:
-    // Impliment POST
-    // Impliment dynamic contracts
+    // TODO: Impliment dynamic contracts
+    //
+    // Votes on a contract according to the sent response
+    app.post('/vote/', (req, res) => {
+        vote.vote(req.body.response)
+        .then(result => {
+            res.send({ data: result });
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    });
+    
+    // TODO: Impliment POST and dynamic contracts
     //
     // Returns amount of total votes on a contract
     app.get('/getTotalVotes', (req, res) => {
@@ -83,15 +93,11 @@ module.exports = function(app, web3, contractAddressList, gasAmount) {
         });
     });
 
-    // TODO:
-    // Impliment POST
-    // Impliment dynamic contracts
+    // TODO: Impliment dynamic contracts
     //
     // Returns amount of votes for a response
-    app.get('/getVotesFor', (req, res) => {
-        var response = "lol";
-
-        getVotesFor.check(response)
+    app.post('/getVotesFor', (req, res) => {
+        getVotesFor.check(req.body.response)
         .then(result => {
             res.send({ data: result });
         })
@@ -100,14 +106,11 @@ module.exports = function(app, web3, contractAddressList, gasAmount) {
         });
     });
 
-    // TODO:
-    // Impliment POST
+    // TODO: Impliment dynamic contracts
     // 
     // Changes previous vote value
-    app.get('/changeVote', (req, res) => {
-        var response = "bad joke";
-
-        changeVote.change(response)
+    app.post('/changeVote', (req, res) => {
+        changeVote.change(req.body.response)
         .then(result => {
             res.send({ data: result });
         })
@@ -116,8 +119,7 @@ module.exports = function(app, web3, contractAddressList, gasAmount) {
         });
     });
 
-    // TODO:
-    // Impliment POST
+    // TODO: Impliment POST and dynamic contracts
     // 
     // Returns voter addresses for an item
     app.get('/getVoterList', (req, res) => {
@@ -130,8 +132,7 @@ module.exports = function(app, web3, contractAddressList, gasAmount) {
         });
     });
 
-    // TODO:
-    // Impliment POST
+    // TODO: Impliment POST and dynamic contracts
     // 
     // Returns counts for the different responses of an item
     app.get('/getResponseCounts', (req, res) => {
