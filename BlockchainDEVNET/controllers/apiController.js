@@ -53,9 +53,6 @@ module.exports = function(app, web3, contractAddressList, gasAmount) {
     //     "itemID": "test contract",
     //     "responses": ["test1", "test2"]
     // }
-    //
-    // TODO: Implement dynamic contracts
-    //
     // Compiles smart contract, deploys it and then returns the mined address
     app.post('/compile', (req, res) => {
         compileContract.create(req.body.itemID, req.body.responses)
@@ -71,7 +68,7 @@ module.exports = function(app, web3, contractAddressList, gasAmount) {
     //
     // Votes on a contract according to the sent response
     app.post('/vote/', (req, res) => {
-        vote.vote(req.body.response)
+        vote.vote(req.body.response, req.body.contractAddress)
         .then(result => {
             res.send({ data: result });
         })
@@ -83,8 +80,8 @@ module.exports = function(app, web3, contractAddressList, gasAmount) {
     // TODO: Impliment POST and dynamic contracts
     //
     // Returns amount of total votes on a contract
-    app.get('/getTotalVotes', (req, res) => {
-        getTotalVotes.check()
+    app.post('/getTotalVotes', (req, res) => {
+        getTotalVotes.check(req.body.contractAddress)
         .then(result => {
             res.send({ data: result });
         })
