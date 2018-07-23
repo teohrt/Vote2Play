@@ -30,23 +30,6 @@ module.exports = function(app, web3, contractAddressList, gasAmount) {
     app.get('/list', (req, res) => {
         res.send(contractAddressList);
     });
-    
-    // Compiles smart contract, deploys it and then returns the mined address
-    // GET: Hard coded values for testing
-    app.get('/compile', (req, res) => {
-        var itemID = "Trace is cool";
-        var response1 = "lol";
-        var response2 = "bad joke";
-        var responses = [response1, response2];
-
-        compileContract.create(itemID, responses)
-        .then(result => {
-            res.send({ data: result });
-        })
-        .catch(error => {
-            console.log(error);
-        });
-    });
 
     // postman example:
     // {
@@ -63,9 +46,9 @@ module.exports = function(app, web3, contractAddressList, gasAmount) {
             console.log(error);
         });
     });
-    
-    // TODO: Impliment dynamic contracts
-    //
+
+    // TODO: Impliment dynamic voters
+    // 
     // Votes on a contract according to the sent response
     app.post('/vote/', (req, res) => {
         vote.vote(req.body.response, req.body.contractAddress)
@@ -76,9 +59,7 @@ module.exports = function(app, web3, contractAddressList, gasAmount) {
             console.log(error);
         });
     });
-    
-    // TODO: Impliment POST and dynamic contracts
-    //
+
     // Returns amount of total votes on a contract
     app.post('/getTotalVotes', (req, res) => {
         getTotalVotes.check(req.body.contractAddress)
@@ -90,11 +71,9 @@ module.exports = function(app, web3, contractAddressList, gasAmount) {
         });
     });
 
-    // TODO: Impliment dynamic contracts
-    //
-    // Returns amount of votes for a response
+    // Returns amount of votes for a specific response of an item
     app.post('/getVotesFor', (req, res) => {
-        getVotesFor.check(req.body.response)
+        getVotesFor.check(req.body.response, req.body.contractAddress)
         .then(result => {
             res.send({ data: result });
         })
@@ -103,11 +82,11 @@ module.exports = function(app, web3, contractAddressList, gasAmount) {
         });
     });
 
-    // TODO: Impliment dynamic contracts
+    // TODO: Impliment dynamic voters
     // 
     // Changes previous vote value
     app.post('/changeVote', (req, res) => {
-        changeVote.change(req.body.response)
+        changeVote.change(req.body.response, req.body.contractAddress)
         .then(result => {
             res.send({ data: result });
         })
@@ -116,11 +95,9 @@ module.exports = function(app, web3, contractAddressList, gasAmount) {
         });
     });
 
-    // TODO: Impliment POST and dynamic contracts
-    // 
     // Returns voter addresses for an item
-    app.get('/getVoterList', (req, res) => {
-        getVoterList.check()
+    app.post('/getVoterList', (req, res) => {
+        getVoterList.check(req.body.contractAddress)
         .then(result => {
             res.send({ data: result });
         })
@@ -129,11 +106,9 @@ module.exports = function(app, web3, contractAddressList, gasAmount) {
         });
     });
 
-    // TODO: Impliment POST and dynamic contracts
-    // 
     // Returns counts for the different responses of an item
-    app.get('/getResponseCounts', (req, res) => {
-        getResponseCounts.check()
+    app.post('/getResponseCounts', (req, res) => {
+        getResponseCounts.check(req.body.contractAddress)
         .then(result => {
             res.send({ data: result });
         })
@@ -143,8 +118,8 @@ module.exports = function(app, web3, contractAddressList, gasAmount) {
     });
 
     // Returns voter addresses and their associated response values
-    app.get('/getVoterHistory', (req, res) => {
-        getVoterHistory.check()
+    app.post('/getVoterHistory', (req, res) => {
+        getVoterHistory.check(req.body.contractAddress)
         .then(result => {
             res.send({ data: result });
         })
@@ -153,3 +128,7 @@ module.exports = function(app, web3, contractAddressList, gasAmount) {
         });
     });
 };
+
+// TODO LIST:
+// Dynamic Voters
+// Account creation

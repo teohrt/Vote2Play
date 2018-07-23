@@ -5,6 +5,7 @@ module.exports = function(web3, contractAddressList, gasAmount) {
         vote: function( vote, contractAddress ) {
             return new Promise(async ( resolve, reject ) => {
                 try {
+                    var abiDef;
                     // Finds ABI in list for the transaction
 				    for (i = 0; i < contractAddressList.length; i++) {
                         if (contractAddress == contractAddressList[i].address) {
@@ -12,7 +13,6 @@ module.exports = function(web3, contractAddressList, gasAmount) {
                         }
                     }
 
-                    var abiDef = contractAddressList[0].abi;
                     var smartContract = web3.eth.contract(abiDef);
                     var contractInstance = smartContract.at(contractAddress);
 

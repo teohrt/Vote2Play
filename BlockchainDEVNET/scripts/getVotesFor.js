@@ -2,10 +2,17 @@ module.exports = function(web3, contractAddressList, gasAmount) {
 
     var obj = {
 
-        check: function( response ) {
+        check: function( response, contractAddress ) {
             return new Promise(async (resolve, reject) => {
                 try {
-                    var abiDef = contractAddressList[0].abi;
+                    var abiDef;
+                    // Finds ABI in list for the transaction
+				    for (i = 0; i < contractAddressList.length; i++) {
+                        if (contractAddress == contractAddressList[i].address) {
+                            abiDef = contractAddressList[i].abi;
+                        }
+                    }
+                    
                     var CounterContract = web3.eth.contract(abiDef);
                     var contractInstance = CounterContract.at(contractAddressList[0].address);
 
