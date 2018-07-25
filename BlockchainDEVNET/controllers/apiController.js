@@ -11,6 +11,7 @@ module.exports = function(app, web3, contractAddressList, gasAmount) {
     var getVoterList = require('../scripts/getVoterList')(web3, contractAddressList, gasAmount);
     var getResponseCounts = require('../scripts/getResponseCounts')(web3, contractAddressList, gasAmount);
     var getVoterHistory = require('../scripts/getVoterHistory')(web3, contractAddressList, gasAmount);
+    var createAccount = require('../scripts/createAccount')(web3);
 
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true}));
@@ -127,8 +128,19 @@ module.exports = function(app, web3, contractAddressList, gasAmount) {
             console.log(error);
         });
     });
+
+    // Account creation. Returns account address and balance
+    // TODO: Implement POST - send password for account creation 
+    app.get('/createAccount', (req, res) => {
+        createAccount.create()
+        .then(result => {
+            res.send({ result });
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    });
 };
 
 // TODO LIST:
 // Dynamic Voters
-// Account creation
