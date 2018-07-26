@@ -1,4 +1,4 @@
-module.exports = function(app, web3, contractAddressList, gasAmount) {    
+module.exports = function(app, web3, contractAddressList, gasAmount, users) {    
 
     var bodyParser = require('body-parser');
     
@@ -28,8 +28,13 @@ module.exports = function(app, web3, contractAddressList, gasAmount) {
     });
     
     // Returns list of smart contract blockchain addresses and their ABI's
-    app.get('/list', (req, res) => {
+    app.get('/contracts', (req, res) => {
         res.send(contractAddressList);
+    });
+
+    // Returns list of smart contract blockchain addresses and their ABI's
+    app.get('/users', (req, res) => {
+        res.send(users);
     });
 
     // postman example:
@@ -130,13 +135,13 @@ module.exports = function(app, web3, contractAddressList, gasAmount) {
     });
 
     // Account creation. Returns account address and balance
-    // TODO: Implement POST - send password for account creation 
-    app.get('/createAccount', (req, res) => {
-        createAccount.create()
+    app.post('/createAccount', (req, res) => {
+        createAccount.create(users, req.body.pass)
         .then(result => {
             res.send({ result });
         })
         .catch(error => {
+
             console.log(error);
         });
     });
