@@ -2,3 +2,5 @@
 // This isn't secure because it's just local for now. and i live dangerously 
 
 geth --datadir node/ --rpc --rpcaddr 'localhost' --rpcapi 'personal,db,eth,net,web3,txpool,miner' --gasprice '1' -unlock 'caf8394c73375e5450edfd75c2ab75596f4988ae' --password password.txt --mine
+
+geth attach node/geth.ipc

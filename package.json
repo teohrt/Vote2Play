@@ -4,6 +4,9 @@
   "description": "Blockchain Voting Platform",
   "main": "index.js",
   "dependencies": {
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "react-scripts": "1.1.4",
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
     "solc": "^0.4.24",
@@ -11,7 +14,10 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   },
   "repository": {
     "type": "git",
