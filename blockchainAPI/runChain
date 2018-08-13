@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# One node setup for clique PoA!! Doesn't even require a bootnode now!
+# The command isn't secure for production but I'm fine with it since it's just being used in a testing environment.
+
+geth --datadir blockchain/node/ --rpc --rpcaddr 'localhost' --rpcapi 'personal,db,eth,net,web3,txpool,miner' --gasprice '1' -unlock 'caf8394c73375e5450edfd75c2ab75596f4988ae' --password blockchain/password.txt --mine
