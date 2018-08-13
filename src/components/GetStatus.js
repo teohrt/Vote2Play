@@ -10,6 +10,7 @@ export default class GetStatus extends Component {
         };
     }
 
+    // API call for status
     componentDidMount() {
         fetch('http://localhost:3333')
             .then(results => {
