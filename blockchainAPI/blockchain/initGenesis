@@ -1,0 +1,5 @@
+#!/bin/bash
+
+#Handy for redoing the chain
+
+geth --nodiscover --datadir node/ init genesis.json 
