@@ -46,7 +46,7 @@ module.exports = function(app, web3, contractAddressList, gasAmount, users) {
     app.post('/compile', (req, res) => {
         compileContract.create(req.body.itemID, req.body.responses)
         .then(result => {
-            res.send({ data: result });
+            res.send({ result });
         })
         .catch(error => {
             console.log(error);

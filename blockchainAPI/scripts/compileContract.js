@@ -1,4 +1,5 @@
 var fs = require('fs');
+var path = require('path');
 var solc = require('solc');
 
 module.exports = function(web3, contractAddressList, gasAmount) {
@@ -10,8 +11,7 @@ module.exports = function(web3, contractAddressList, gasAmount) {
                 var result = {};
 
                 try {
-
-                    var code = fs.readFileSync('./BlockchainDEVNET/scripts/Voting.sol').toString();
+                    var code = fs.readFileSync(path.join(__dirname,'Voting.sol')).toString();
                     var compiledCode = solc.compile( code );
                     var abiDefinition = JSON.parse( compiledCode.contracts[':Voting'].interface );
                     var contract = web3.eth.contract( abiDefinition );

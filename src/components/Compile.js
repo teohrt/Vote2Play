@@ -1,32 +1,39 @@
 import React, { Component } from 'react';
+import { Button } from 'react-bootstrap';
 
 export default class Compile extends Component {
     constructor() {
         super();
         this.state = {
             itemID: "",
-            responses: ""
+            responses: [],
+            minedAddress: ""
         };
     }
 
     // TODO: edit this for the compile API call
     // API call for status
-    componentDidMount() {
-        fetch('http://localhost:3333')
+    postRequest() {
+        fetch('http://localhost:3333/compile', 
+                {
+                    method: 'post',
+                    body: {
+                        "itemID": this.state.itemID,
+                        "responses": this.state.responses
+                    }
+                })
             .then(results => {
                 return results.json();
             }).then(data => {
-                this.setState({ isCon: JSON.stringify(data.connected) });
-                if (data.connected !== false) {
-                    this.setState({ coinbase: JSON.stringify(data.coinbase) });
-                    this.setState({ coinbaseBalance: JSON.stringify(data.coinbaseBalance) });
+                    this.setState({ minedAddress: JSON.stringify(data.minedAddress) });
                 }
-            }).catch(error => console.error(error));
+            ).catch(error => console.error(error));
     }
 
     getUserData() {
         return (
             <div>
+                <h2>Create Votable</h2>
                 <input 
                     type = "text"
                     placeholder = "Votable Name"
@@ -39,9 +46,11 @@ export default class Compile extends Component {
                     type = "text"
                     placeholder = "Responses"
                     value = {this.props.responses}
-                    name = "itemID"
+                    name = "responses"
                     onChange = {this.handleChange}
                 />
+                <br />
+                <Button bsStyle="success">Create Votable</Button>  
             </div>
         )
     }

@@ -21,7 +21,6 @@ app.use((req, res, next) => {
 // Routes
 apiController(app, web3, contractAddressList, gasAmount, users);
 
-
 app.listen(serverPort, () => {
     console.log('RESTful server listening on port: ' + serverPort + ' ...\n' + 
     'Blockchain is connected: ' + web3.isConnected() + '\n');
