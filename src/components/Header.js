@@ -11,15 +11,15 @@ export default class Header extends React.Component {
                     </Navbar.Brand>
                 </Navbar.Header>
                 <Nav>
-                    <NavItem eventKey={1} href="/BlockchainStatus">
+                    <NavItem eventKey={1} href="/BlockchainStatusPage">
                         Network Status
                     </NavItem>
                     <NavDropdown eventKey={2} title="Options" id="basic-nav-dropdown">
-                        <MenuItem eventKey={2.1}>Action</MenuItem>
-                        <MenuItem eventKey={2.2}>Another action</MenuItem>
-                        <MenuItem eventKey={2.3}>Something else here</MenuItem>
+                        <MenuItem eventKey={2.1} href="/CompilePage" >Create Votable</MenuItem>
+                        <MenuItem eventKey={2.2}>Vote</MenuItem>
+                        <MenuItem eventKey={2.3}>Change Vote</MenuItem>
                         <MenuItem divider />
-                        <MenuItem eventKey={2.4}>Separated link</MenuItem>
+                        <MenuItem eventKey={2.4}>Votable Statistics</MenuItem>
                     </NavDropdown>
                 </Nav>
             </Navbar>

@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { Jumbotron, Grid } from 'react-bootstrap';
-import GetStatus from './GetStatus';
 import Header from './Header';
+import Compile from './Compile';
 
-export default class BlockchainStatus extends Component {
+export default class CompilePage extends Component {
     render() {
         return (
             <div>
                 <Header />
                 <Grid>
                     <Jumbotron>
-                        <GetStatus />
+                        <Compile />
                     </Jumbotron>
                 </Grid>
             </div>

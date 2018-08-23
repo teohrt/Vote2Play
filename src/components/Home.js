@@ -13,7 +13,7 @@ export default class Home extends Component {
                         <h2>Welcome to Vote2Play!</h2>
                         <p>Blockchain is cool!</p>
                     </Jumbotron>
-                    <Link to="/BlockchainStatus">
+                    <Link to="/BlockchainStatusPage">
                         <Button bsStyle="primary">Blockchain Status</Button>
                     </Link>
                 </Grid>

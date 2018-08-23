@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Home from './components/Home';
-import BlockchainStatus from './components/BlockchainStatus';
+import BlockchainStatusPage from './components/BlockchainStatusPage';
+import CompilePage from './components/CompilePage';
 
 export default class App extends Component {
     render() {
@@ -9,7 +10,8 @@ export default class App extends Component {
             <Router>
                 <div>
                     <Route exact path="/" component={Home} />
-                    <Route exact path="/BlockchainStatus" component={BlockchainStatus} />
+                    <Route exact path="/BlockchainStatusPage" component={BlockchainStatusPage} />
+                    <Route exact path="/CompilePage" component={CompilePage} />
                 </div>
             </Router>
         );
