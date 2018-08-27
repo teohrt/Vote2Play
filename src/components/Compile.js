@@ -9,28 +9,56 @@ export default class Compile extends Component {
             responses: [],
             minedAddress: ""
         };
+
+        this.handleIDChange = this.handleIDChange.bind(this);
+        this.handleResponseChange = this.handleResponseChange.bind(this);
+        this.handleButton = this.handleButton.bind(this);
+        this.postRequest = this.postRequest.bind(this);
     }
 
-    // TODO: edit this for the compile API call
     // API call for status
     postRequest() {
         fetch('http://localhost:3333/compile', 
                 {
-                    method: 'post',
-                    body: {
-                        "itemID": this.state.itemID,
-                        "responses": this.state.responses
-                    }
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                      },
+                    body: JSON.stringify({
+                        itemID: this.state.itemID,
+                        responses: this.state.responses
+                    })
                 })
             .then(results => {
                 return results.json();
             }).then(data => {
-                    this.setState({ minedAddress: JSON.stringify(data.minedAddress) });
+                    this.setState({ minedAddress: JSON.stringify(data.result.minedAddress) });
+                    console.log(this.state.minedAddress);
                 }
             ).catch(error => console.error(error));
     }
 
+    handleIDChange (e) {
+        this.setState({ itemID: e.target.value });
+    }
+
+    handleResponseChange (e) {
+        var array = e.target.value.split(",");
+        this.setState({ responses: array });
+    }
+
+    handleButton () {
+        //alert(this.state.responses);
+        this.postRequest();
+    }
+
     getUserData() {
+
+        var style = {
+            fontSize: 15
+        }
+
         return (
             <div>
                 <h2>Create Votable</h2>
@@ -39,7 +67,7 @@ export default class Compile extends Component {
                     placeholder = "Votable Name"
                     value = {this.props.itemID}
                     name = "itemID"
-                    onChange = {this.handleChange}
+                    onChange = {this.handleIDChange}
                 />
                 <br />
                 <input 
@@ -47,10 +75,11 @@ export default class Compile extends Component {
                     placeholder = "Responses"
                     value = {this.props.responses}
                     name = "responses"
-                    onChange = {this.handleChange}
+                    onChange = {this.handleResponseChange}
                 />
                 <br />
-                <Button bsStyle="success">Create Votable</Button>  
+                <p style={style}>Seperate individual responses by a comma.</p>
+                <Button bsStyle="success" onClick={this.handleButton}>Create Votable</Button>  
             </div>
         )
     }
