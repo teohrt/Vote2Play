@@ -56,7 +56,7 @@ module.exports = function(app, web3, contractAddressList, gasAmount, users) {
     // TODO: Impliment dynamic voters
     // 
     // Votes on a contract according to the sent response
-    app.post('/vote/', (req, res) => {
+    app.post('/vote', (req, res) => {
         vote.vote(req.body.response, req.body.contractAddress)
         .then(result => {
             res.send({ data: result });

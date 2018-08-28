@@ -16,7 +16,7 @@ export default class Header extends React.Component {
                     </NavItem>
                     <NavDropdown eventKey={2} title="Options" id="basic-nav-dropdown">
                         <MenuItem eventKey={2.1} href="/CompilePage" >Create Votable</MenuItem>
-                        <MenuItem eventKey={2.2}>Vote</MenuItem>
+                        <MenuItem eventKey={2.2} href="/VotePage">Vote</MenuItem>
                         <MenuItem eventKey={2.3}>Change Vote</MenuItem>
                         <MenuItem divider />
                         <MenuItem eventKey={2.4}>Votable Statistics</MenuItem>
