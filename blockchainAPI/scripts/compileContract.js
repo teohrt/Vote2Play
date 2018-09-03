@@ -21,13 +21,13 @@ module.exports = function(web3, contractAddressList, gasAmount) {
                     while(true) {
 
                         if (deployedContract.address) {
-
                             result.address = deployedContract.address;
+                            result.itemID = itemID;
+                            result.responses = responses;
                             result.abi = abiDefinition;
                             console.log('***Successful compile. Contract Address: ' + deployedContract.address);
                             contractAddressList.push(result);
                             return resolve( { minedAddress: deployedContract.address } ); 
-                            
                         }
                         await sleep(1000);
                     }
