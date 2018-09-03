@@ -23,8 +23,7 @@ module.exports = function(web3, contractAddressList, gasAmount) {
                     return resolve({ value: result }); 
                 }
                 catch(e) {
-                    console.log('***Error with addX\n');
-                    console.log(e);
+                    console.log('***Error with Vote\n');
                     return reject(e);
                 }
             });

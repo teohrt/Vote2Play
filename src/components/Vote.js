@@ -8,10 +8,11 @@ export default class Vote extends Component {
             itemID: "",
             responses: [],
             response: "",
-            contractAddress: ""
+            contractAddress: "",
+            result: ""
         };
 
-        this.handleButton = this.handleButton.bind(this);
+        this.handleOptionChange = this.handleOptionChange.bind(this);
         this.voteRequest = this.voteRequest.bind(this);
     }
 
@@ -23,7 +24,7 @@ export default class Vote extends Component {
             }).then(data => {
                     this.setState({ itemID: data[0].itemID })
                     this.setState({ responses: data[0].responses });
-                    this.setState({ contractAddress: JSON.stringify(data[0].address) });
+                    this.setState({ contractAddress: data[0].address });
                 }
             ).catch(error => console.error(error));
     }
@@ -45,14 +46,14 @@ export default class Vote extends Component {
             .then(results => {
                 return results.json();
             }).then(data => {
-                    this.setState({ minedAddress: JSON.stringify(data.result.minedAddress) });
-                    console.log(this.state.minedAddress);
+                    this.setState({ result: JSON.stringify(data.data.value) });
+                    this.state.result === 'true' ? alert("Voted!") : alert("Can't vote again!");
                 }
             ).catch(error => console.error(error));
     }
 
-    handleButton () {
-        this.voteRequest();
+    handleOptionChange(e) {
+        this.setState({ response: e.target.value });
     }
 
     render() {
@@ -62,7 +63,9 @@ export default class Vote extends Component {
                     <label>
                         <input 
                             type = "radio"
-                            name = "itemID"
+                            name = "response"
+                            value = {response}
+                            onChange = {this.handleOptionChange}
                         />
                         {response}
                     </label>
@@ -75,7 +78,7 @@ export default class Vote extends Component {
             <div>
                 <h2>Votable: {this.state.itemID}</h2>
                 {elements}
-                <Button bsStyle="success" onClick={this.handleButton}>Vote!</Button>  
+                <Button bsStyle="success" onClick={this.voteRequest}>Vote!</Button>  
             </div>
         )
     }
