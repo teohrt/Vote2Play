@@ -5,18 +5,31 @@ export default class Vote extends Component {
     constructor() {
         super();
         this.state = {
+            itemID: "",
+            responses: [],
             response: "",
             contractAddress: ""
         };
 
-        this.handleIDChange = this.handleIDChange.bind(this);
-        this.handleResponseChange = this.handleResponseChange.bind(this);
         this.handleButton = this.handleButton.bind(this);
-        this.postRequest = this.postRequest.bind(this);
+        this.voteRequest = this.voteRequest.bind(this);
     }
 
-    // API call for status
-    postRequest() {
+    // API call to grab available votable responses
+    componentWillMount() {
+        fetch('http://localhost:3333/contracts')
+            .then(results => {
+                return results.json();
+            }).then(data => {
+                    this.setState({ itemID: data[0].itemID })
+                    this.setState({ responses: data[0].responses });
+                    this.setState({ contractAddress: JSON.stringify(data[0].address) });
+                }
+            ).catch(error => console.error(error));
+    }
+
+    // API call for vote transaction
+    voteRequest() {
         fetch('http://localhost:3333/vote', 
                 {
                     method: 'POST',
@@ -25,8 +38,8 @@ export default class Vote extends Component {
                         'Content-Type': 'application/json'
                       },
                     body: JSON.stringify({
-                        itemID: this.state.itemID,
-                        responses: this.state.responses
+                        response: this.state.response,
+                        contractAddress: this.state.contractAddress
                     })
                 })
             .then(results => {
@@ -38,54 +51,32 @@ export default class Vote extends Component {
             ).catch(error => console.error(error));
     }
 
-    handleIDChange (e) {
-        this.setState({ itemID: e.target.value });
-    }
-
-    handleResponseChange (e) {
-        var array = e.target.value.split(",");
-        this.setState({ responses: array });
-    }
-
     handleButton () {
-        //alert(this.state.responses);
-        this.postRequest();
-    }
-
-    getUserData() {
-
-        var style = {
-            fontSize: 15
-        }
-
-        return (
-            <div>
-                <h2>Create Votable</h2>
-                <input 
-                    type = "text"
-                    placeholder = "Votable Name"
-                    value = {this.props.itemID}
-                    name = "itemID"
-                    onChange = {this.handleIDChange}
-                />
-                <br />
-                <input 
-                    type = "text"
-                    placeholder = "Responses"
-                    value = {this.props.responses}
-                    name = "responses"
-                    onChange = {this.handleResponseChange}
-                />
-                <br />
-                <p style={style}>Seperate individual responses by a comma.</p>
-                <Button bsStyle="success" onClick={this.handleButton}>Create Votable</Button>  
-            </div>
-        )
+        this.voteRequest();
     }
 
     render() {
+        var elements = this.state.responses.map((response, i) => {
+            return (
+                <div key={i}>
+                    <label>
+                        <input 
+                            type = "radio"
+                            name = "itemID"
+                        />
+                        {response}
+                    </label>
+                    <br />
+                </div>
+            );
+        });
+
         return (
-            <div>{this.getUserData()}</div>
+            <div>
+                <h2>Votable: {this.state.itemID}</h2>
+                {elements}
+                <Button bsStyle="success" onClick={this.handleButton}>Vote!</Button>  
+            </div>
         )
     }
 }
