@@ -17,7 +17,7 @@ export default class App extends Component {
                     <Route exact path="/CompilePage" component={CompilePage} />
                     <Route exact path="/VotePage" component={VotePage} />
                     <Route exact path="/StatsPage" component={StatsPage} />
-                    <Route exact path="/ChangePage" component={ChangePafe} />
+                    <Route exact path="/ChangePage" component={ChangePage} />
                 </div>
             </Router>
         );
