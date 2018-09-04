@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Table } from 'react-bootstrap';
 
 export default class Stats extends Component {
     constructor() {
@@ -57,7 +58,7 @@ export default class Stats extends Component {
         return (
             <div>
                 <h2>Votable: {this.state.itemID}</h2>
-                <table>
+                <Table striped bordered condensed hover>
                     <tbody>
                     <tr>
                         <th>Response</th>
@@ -65,7 +66,7 @@ export default class Stats extends Component {
                     </tr>
                     {tableData}
                     </tbody>
-                </table>
+                </Table>
             </div>
         )
     }
