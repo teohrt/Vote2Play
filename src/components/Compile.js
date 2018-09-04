@@ -12,7 +12,6 @@ export default class Compile extends Component {
 
         this.handleIDChange = this.handleIDChange.bind(this);
         this.handleResponseChange = this.handleResponseChange.bind(this);
-        this.handleButton = this.handleButton.bind(this);
         this.postRequest = this.postRequest.bind(this);
     }
 
@@ -44,13 +43,8 @@ export default class Compile extends Component {
     }
 
     handleResponseChange (e) {
-        var array = e.target.value.split(",");
+        var array = e.target.value.split(", ");
         this.setState({ responses: array });
-    }
-
-    handleButton () {
-        //alert(this.state.responses);
-        this.postRequest();
     }
 
     getUserData() {
@@ -78,8 +72,9 @@ export default class Compile extends Component {
                     onChange = {this.handleResponseChange}
                 />
                 <br />
-                <p style={style}>Seperate individual responses by a comma.</p>
-                <Button bsStyle="success" onClick={this.handleButton}>Create Votable</Button>  
+                <p style={style}>Seperate individual responses by a comma and a space. ', ' </p>
+                <p style={style}>(Ex: Response one, response two)</p>
+                <Button bsStyle="success" onClick={this.postRequest}>Create Votable</Button>  
             </div>
         )
     }
