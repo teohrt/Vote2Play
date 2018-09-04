@@ -5,6 +5,7 @@ module.exports = function(web3, contractAddressList, gasAmount) {
         check: function( contractAddress ) {
             return new Promise(async (resolve, reject) => {
                 try {
+                    console.log(contractAddress);
                     var abiDef;
                     // Finds ABI in list for the transaction
 				    for (i = 0; i < contractAddressList.length; i++) {

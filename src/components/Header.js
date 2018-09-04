@@ -19,7 +19,7 @@ export default class Header extends React.Component {
                         <MenuItem eventKey={2.2} href="/VotePage">Vote</MenuItem>
                         <MenuItem eventKey={2.3}>Change Vote</MenuItem>
                         <MenuItem divider />
-                        <MenuItem eventKey={2.4}>Votable Statistics</MenuItem>
+                        <MenuItem eventKey={2.4} href="/StatsPage">Votable Statistics</MenuItem>
                     </NavDropdown>
                 </Nav>
             </Navbar>

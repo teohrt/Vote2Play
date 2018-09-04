@@ -4,7 +4,7 @@ import Home from './components/HomePage';
 import BlockchainStatusPage from './components/BlockchainStatusPage';
 import CompilePage from './components/CompilePage';
 import VotePage from './components/VotePage';
-
+import StatsPage from './components/StatsPage';
 
 export default class App extends Component {
     render() {
@@ -15,6 +15,7 @@ export default class App extends Component {
                     <Route exact path="/BlockchainStatusPage" component={BlockchainStatusPage} />
                     <Route exact path="/CompilePage" component={CompilePage} />
                     <Route exact path="/VotePage" component={VotePage} />
+                    <Route exact path="/StatsPage" component={StatsPage} />
                 </div>
             </Router>
         );

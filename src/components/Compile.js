@@ -34,7 +34,7 @@ export default class Compile extends Component {
                 return results.json();
             }).then(data => {
                     this.setState({ minedAddress: JSON.stringify(data.result.minedAddress) });
-                    console.log(this.state.minedAddress);
+                    alert("Smart contract mined at: " + this.state.minedAddress);
                 }
             ).catch(error => console.error(error));
     }

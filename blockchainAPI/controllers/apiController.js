@@ -114,6 +114,7 @@ module.exports = function(app, web3, contractAddressList, gasAmount, users) {
 
     // Returns counts for the different responses of an item
     app.post('/getResponseCounts', (req, res) => {
+        console.log(req.body.contractAddress);
         getResponseCounts.check(req.body.contractAddress)
         .then(result => {
             res.send({ data: result });
