@@ -23,6 +23,7 @@ export default class Stats extends Component {
                         contractAddress: data[0].address
                     });
                     
+                    // Nested API call that depends on some output of the previous call
                     return fetch('http://localhost:3333/getResponseCounts',
                     {
                         method: 'POST',
@@ -38,8 +39,7 @@ export default class Stats extends Component {
             ).then(results => {
                 return results.json();
             }).then(data => {   
-                    console.log(data);
-                    this.setState({ counts: data.data.value[1].counts });
+                    this.setState({ counts: data.data.value[1] });
                 }
             ).catch(error => console.error(error));
     }

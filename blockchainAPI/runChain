@@ -3,4 +3,4 @@
 # Single node setup for Clique PoA!! Doesn't even require a bootnode! Much nicer if resources are limited.
 # Almost any kind of connection is allowed since it's a testing environment.
 
-geth --datadir blockchain/node/ --rpc --rpcaddr 'localhost' --rpcapi 'personal,db,eth,net,web3,txpool,miner' --gasprice '1' -unlock 'd287c73790bea0a6e7bb6650da5e2f05773651db' --password blockchain/password.txt --mine
+geth --datadir blockchain/node/ --rpc --rpcaddr 'localhost' --rpcapi 'personal,db,eth,net,web3,txpool,miner' --gasprice '1' -unlock '948d0d2d43ac458088941ee5e867ec499071a565' --password blockchain/password.txt --mine
