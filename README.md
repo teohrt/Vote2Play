@@ -33,7 +33,7 @@ navigate to the parent directory, blockchainAPI,and run the command:
 ```
 ./runChain
 ```
-###Start the REST API and Web Server
+### Start the REST API and Web Server
 *  In another terminal, navigate to the blockchainAPI directory and start the API with the command:
 ```
 node app.js
